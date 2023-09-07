@@ -1,17 +1,21 @@
 class Solution:
     def maxProfit(self, prices: List[int]) -> int:
-        mx = 0
+        # Dynamic Prog: for getting maximum profit if you have chance to get profit, SAVE IT
+        max_prof = 0
         profits = [0]
-        mini = prices[0]
+        min_price = prices[0]
+
         for i in range(len(prices)-1):
             if prices[i] < prices[i+1]:
-                mini = prices[i] if mini > prices[i] else mini
-                mx = (prices[i+1] - mini)
+                min_price = prices[i] if min_price > prices[i] else min_price
+                max_prof = (prices[i+1] - min_price)
             else:
-                profits.append(mx)
-                mx = 0
+                profits.append(max_prof)
+                max_prof = 0
+                
+        profits.append(max_prof)
 
-        return (max(profits) if max(profits)>mx else mx)
+        return (max(profits))
 
 
 
